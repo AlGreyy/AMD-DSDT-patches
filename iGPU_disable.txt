@@ -1,0 +1,50 @@
+#Maintained by: AlGrey for: Ryzen
+#iGPU_disable.txt
+
+#disable iGPU
+
+into device label VGA insert
+begin
+Method (_DSM, 4, NotSerialized)\n
+{\n
+    If (LNot (Arg2)) { Return (Buffer(One) { 0x03 } ) }\n
+    Return (Package(0x06)\n
+    {\n
+        "name",\n 
+                        Buffer (0x09)\n
+                        {\n
+                            "#display"\n
+                        }, \n
+\n
+                        "IOName", \n
+                        "#display", \n
+                        "class-code", \n
+                        Buffer (0x04)\n
+                        {\n
+                             0xFF, 0xFF, 0xFF, 0xFF    \n                     
+                        }\n
+    })\n
+}\n
+end;
+
+into device label AS43 insert
+begin
+Method (_DSM, 4, NotSerialized)\n
+{\n
+    If (LNot (Arg2)) { Return (Buffer(One) { 0x03 } ) }\n
+    Return (Package(0x0a)\n
+    {\n
+        "kUSBSleepPortCurrentLimit",\n
+	0x0834,\n
+	"kUSBSleepPowerSupply",\n
+	0x13EC,\n
+	"kUSBWakePortCurrentLimit",\n
+	0x0834,\n
+	"kUSBWakePowerSupply",\n
+	0x13EC,\n
+	"kUSBSHostControllerDisableUSB3LPM",\n
+	0x01\n
+
+    })\n
+}\n
+end;
