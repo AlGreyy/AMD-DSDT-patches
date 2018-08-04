@@ -1,4 +1,4 @@
-#Maintained by: AlGrey for: Ryzen
+#Maintained by: AlGrey for: APUs
 #iGPU_disable.txt
 
 #disable iGPU
